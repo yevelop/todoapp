@@ -1,16 +1,17 @@
 <p>labs works!</p>
 
-<h1> Hola este es mi primer proyecto</h1>
+<h1> Laboratorio</h1>
 <h2>{{getWelcome()}}</h2>
 <ul>
-<li *ngFor="let item of tasks" >
-{{item}}
+<p>total: {{ tasks().length }}</p>
+<li *ngFor="let task of tasks(); index as i" >
+{{ i+1 }} {{ task }}
 </li>
 </ul>
 <hr/>
 <h2>{{'Hola'.repeat(4)}}</h2>
 <p> la suma de 3 + 3 es {{3 + 3}}</p>
-
+<p> Hola soy {{name()}} y mi edad es {{age}}</p>
 <hr/>
 
 <img [src] ="person.avatar" alt="" >
@@ -24,15 +25,21 @@
 <button  (dblclick)="doubleClickHandler()">double Click me</button>
 
 <p>(change)</p>
-<input type="number" value="person.age" (change)="changeHandler($event)">
+<input type="number" [value]="person.age" (change)="changeHandler($event)">
 
 <p>(keydown)</p>
-<input type="text" value="" (keydown)="keydownHandler($event)">
+<input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
 
 <p>(shift)</p>
-<input type="text" value="" (keydown.shift.t)="clickHandler()">
+<input type="text" [value]="person.name"  (keydown.shift.t)="clickHandler()">
 
 
+<h1>Signals</h1>
 
+<input type="text" [value]="name()" (change)="changeHandler($event)">
+<p>name: {{name()}}</p>
+<p>name: {{name()}}</p>
 
-
+<input type="text" [value]="name()" (keydown)="keydownHandler($event)">
+<p>name: {{name()}}</p>
+<p>name: {{name()}}</p>

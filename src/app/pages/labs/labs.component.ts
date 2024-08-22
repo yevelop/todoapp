@@ -1,6 +1,6 @@
 // Aqui tenenmos la logica de negocio del componente
 
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -14,16 +14,17 @@ import { RouterOutlet } from '@angular/router';
 export class LabsComponent {
   private welcome = 'Hola';
 
-  tasks = [
+  tasks = signal([
     'Instalar angular CLI',
-    'Componentes',
-    'Array de tareas'
-  ]
+    'Crear proyecto',
+    'Crear componente',
+    'Crear cervicio'
+  ]);
   getWelcome(){
     return this.welcome;
   }
 
-  name = 'Jose';
+  name = signal('Jose');
   age = 18;
   disabled = false;
   img = 'https://w3schools.com/howto/img_avatar.png';
@@ -42,12 +43,16 @@ export class LabsComponent {
     alert('Evento Doble click')
   }
   changeHandler(event: Event){
-    console.log(event);
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.name.set(newValue);
+    console.log(newValue);
   }
   keydownHandler(event: KeyboardEvent){
     const input = event.target as HTMLInputElement;
-    console.log(input.value);
-
+    const newValue = input.value;
+    this.name.set(newValue);  
+    console.log(newValue);
   }
 
 }
