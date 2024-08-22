@@ -1,0 +1,38 @@
+<p>labs works!</p>
+
+<h1> Hola este es mi primer proyecto</h1>
+<h2>{{getWelcome()}}</h2>
+<ul>
+<li *ngFor="let item of tasks" >
+{{item}}
+</li>
+</ul>
+<hr/>
+<h2>{{'Hola'.repeat(4)}}</h2>
+<p> la suma de 3 + 3 es {{3 + 3}}</p>
+
+<hr/>
+
+<img [src] ="person.avatar" alt="" >
+
+<input type="number" [value]="person.age">
+<button [disabled]="person.disabled" >Click me</button>
+
+<p>person: {{person.name}}</p>
+<hr/>
+<button  (click)="clickHandler()">Click me</button>
+<button  (dblclick)="doubleClickHandler()">double Click me</button>
+
+<p>(change)</p>
+<input type="number" value="person.age" (change)="changeHandler($event)">
+
+<p>(keydown)</p>
+<input type="text" value="" (keydown)="keydownHandler($event)">
+
+<p>(shift)</p>
+<input type="text" value="" (keydown.shift.t)="clickHandler()">
+
+
+
+
+

@@ -1,0 +1,17 @@
+button {
+    background-color: #007BFF;  /* Color de fondo azul */
+    color: #fff;                 /* Color del texto blanco */
+    padding: 10px 20px;          /* Añade relleno */
+    border: none;                /* Sin borde */
+    border-radius: 5px;          /* Bordes redondeados */
+    cursor: pointer;             /* Cambia el cursor al pasar sobre el botón */
+  }
+  
+  button:disabled {
+    background-color: #ccc;      /* Color de fondo gris cuando está deshabilitado */
+    cursor: not-allowed;         /* Cambia el cursor cuando el botón está deshabilitado */
+  }
+  
+  button:hover {
+    background-color: #0056b3;   /* Color más oscuro al pasar el cursor */
+  }
