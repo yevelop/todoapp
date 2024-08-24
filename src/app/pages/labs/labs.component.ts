@@ -29,12 +29,12 @@ export class LabsComponent {
   disabled = false;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
-  person = {
+  person = signal({
     name: 'Jose',
     age: 18,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
     disabled: false,
-  }
+  });
 
   clickHandler(){
     alert('Evento click')
@@ -53,6 +53,19 @@ export class LabsComponent {
     const newValue = input.value;
     this.name.set(newValue);  
     console.log(newValue);
+  }
+
+  changeHandlerObject(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newAge = parseInt(input.value); // Parseamos el valor como un número entero
+  
+    // Usamos el método update para actualizar solo la edad en el objeto person
+    this.person.update(person => ({
+      ...person,    // Desestructuramos el objeto actual para mantener el resto de las propiedades
+      age: newAge   // Actualizamos la propiedad age con el nuevo valor
+    }));
+  
+   
   }
 
 }

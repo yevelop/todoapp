@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Task } from '../../models/task.model'
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  tasks = signal([
-    'Instalar angular CLI',
-    'Crear proyecto',
-    'Crear componente',
-    'Crear cervicio'
+  tasks = signal<Task[]>([
+      {
+      id: new Date(Date.now()),
+      title: 'Crear proyecto',
+      completed: false
+      },
+      {
+        id: new Date(Date.now()),
+        title: 'Instalar angular CLI',
+        completed: false
+        },
   ]);
+
 
   changeHandler(event: Event){
     const input = event.target as HTMLInputElement;
@@ -23,7 +31,12 @@ export class HomeComponent {
     // y le agrega el nuevo valor
     this.addTask(newTask);
   }
-  addTask(newTask: string){
+  addTask(title: string){
+    const newTask: Task = {
+      id: new Date(Date.now()),
+      title,
+      completed: false,
+    }
      this.tasks.update(tasks =>[...tasks, newTask]);
   }
   /**
@@ -36,5 +49,22 @@ export class HomeComponent {
     // sin el valor que se le pasa por parametro no la actualiza, sino que crea una nueva
     // instancia de la lista de tareas
     this.tasks.update(tasks => tasks.filter((task, i) => i !== index));
+  }
+
+  /**
+   * Toggles the completed status of a task.
+   *
+   * @param index - The index of the task to be toggled.
+   */
+  updateTask(index: number){
+    this.tasks.update(tasks => tasks.map((task, i) => {
+      if(i === index){
+        return {
+          ...task,
+          completed: !task.completed,
+        };
+      }
+      return task;
+    }));
   }
 }
