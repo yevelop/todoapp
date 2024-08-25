@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Task } from '../../models/task.model'
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {Component, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Task} from '../../models/task.model'
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [ReactiveFormsModule]
@@ -14,42 +14,42 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 export class HomeComponent {
   // Lista de tareas
   tasks = signal<Task[]>([
-      {
+    {
       id: new Date(Date.now()),
       title: 'Crear proyecto',
       completed: false
-      },
-      {
-        id: new Date(Date.now()),
-        title: 'Instalar angular CLI',
-        completed: false
-        },
+    },
+    {
+      id: new Date(Date.now()),
+      title: 'Instalar angular CLI',
+      completed: false
+    },
   ]);
   newTaskControl = new FormControl('', {
-   nonNullable: true,
-   validators: [
-    Validators.required,
-     Validators.minLength(3),
-     Validators.maxLength(30),
-   ],
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(30),
+    ],
 
 
   })
 
 
   // Manejador de cambio de input
-  changeHandler(event: Event){
+  changeHandler(event: Event) {
     const input = event.target as HTMLInputElement;
     const newTask = input.value;
     // Agregar una nueva tarea
     this.addTask(newTask);
   }
 
-  changeHandlerForm(){
+  changeHandlerForm() {
 
-    if(this.newTaskControl.valid){
+    if (this.newTaskControl.valid) {
       const newTask = this.newTaskControl.value.trim();
-      if(newTask != '') {
+      if (newTask != '') {
         this.addTask(newTask);
         this.newTaskControl.reset();
       }
@@ -58,13 +58,13 @@ export class HomeComponent {
   }
 
   // Agregar una tarea a la lista
-  addTask(title: string){
+  addTask(title: string) {
     const newTask: Task = {
       id: new Date(Date.now()),
       title,
       completed: false,
     }
-     this.tasks.update(tasks =>[...tasks, newTask]);
+    this.tasks.update(tasks => [...tasks, newTask]);
   }
 
   /**
@@ -72,7 +72,7 @@ export class HomeComponent {
    *
    * @param index - El índice de la tarea a eliminar.
    */
-  deleteTask(index: number){
+  deleteTask(index: number) {
     // Eliminar una tarea de la lista
     this.tasks.update(tasks => tasks.filter((task, i) => i !== index));
   }
@@ -82,9 +82,9 @@ export class HomeComponent {
    *
    * @param index - El índice de la tarea a cambiar.
    */
-  updateTask(index: number){
+  updateTask(index: number) {
     this.tasks.update(tasks => tasks.map((task, i) => {
-      if(i === index){
+      if (i === index) {
         return {
           ...task,
           completed: !task.completed,
@@ -93,4 +93,39 @@ export class HomeComponent {
       return task;
     }));
   }
+
+  updateTaskEditingMode(index: number) {
+    this.tasks.update(tasks => tasks.map((task, i) => {
+      if (i === index) {
+        return {
+          ...task,
+          editing: true,
+        }
+      } else {
+        // Solo se puede editar una tarea a la vez
+        return {
+          ...task,
+          editing: false,
+        };
+      }
+    }));
+  }
+
+  updateTaskText(index: number, Event: Event) {
+    const input = Event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.tasks.update(prevState => {
+      return prevState.map((task, i) => {
+        if (i === index) {
+          return {
+            ...task,
+            title: input.value,
+            editing: false
+          }
+        }
+        return task;
+      })
+    });
+  }
+
 }

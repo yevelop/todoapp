@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 
@@ -9,7 +9,7 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
+  imports: [CommonModule, RouterOutlet, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
