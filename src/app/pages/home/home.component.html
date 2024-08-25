@@ -14,7 +14,7 @@
     <section class="main">
       <ul class="todo-list">
         <li (dblclick)="updateTaskEditingMode(i)"
-            *ngFor="let task of tasks();index as i"
+            *ngFor="let task of taskByFilter();index as i"
             [class.editing]="task.editing"
             [class.completed]="task.completed">
           <div class="view">
@@ -24,50 +24,34 @@
           </div>
           <input class="edit" (keydown.enter)="updateTaskText(i,$event)" [value]="task.title"/>
         </li>
-        <!--   <li>
-             <div class="view">
-               <input class="toggle" type="checkbox" />
-               <label>Buy a unicorn</label>
-               <button class="destroy"></button>
-             </div>
-            <input class="edit" value="Buy a unicorn" />
-           </li>
-
-           <li class="editing">
-             <div class="view">
-               <input class="toggle" type="checkbox" />
-               <label>Make dishes</label>
-               <button class="destroy"></button>
-             </div>
-             <input class="edit" value="Make dishes" />
-           </li>
-           -->
       </ul>
     </section>
-    <!-- This footer should be hidden by default and shown when there are todos -->
+
     <footer class="footer">
-      <!-- This should be `0 items left` by default -->
 
       <span class="todo-count">
-          <strong>{{ tasks().length }}</strong>
-          <span *ngIf="tasks().length === 1 else plural">item</span>
+          <strong>{{ taskByFilter().length }}</strong>
+          <span *ngIf="filter().length === 1 else plural">item</span>
         </span>
 
       <ng-template #plural> items</ng-template>
-      <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a (click)="changeFilter('all')"
+             routerLink="/"
+             [class.selected]="filter() === 'all'">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a (click)="changeFilter('pending')" routerLink="/pending"
+             [class.selected]="filter() === 'pending'">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a (click)="changeFilter('completed')" routerLink="/completed"
+             [class.selected]="filter() === 'completed'">Completed</a>
         </li>
       </ul>
-      <!-- Hidden if no completed items are left ↓ -->
       <button class="clear-completed">Clear completed</button>
     </footer>
   </div>
+
 </section>

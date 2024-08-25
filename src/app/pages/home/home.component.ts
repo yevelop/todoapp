@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, computed, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Task} from '../../models/task.model'
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -32,8 +32,21 @@ export class HomeComponent {
       Validators.minLength(3),
       Validators.maxLength(30),
     ],
+  })
+  filter = signal(<'all' | 'pending' | 'completed'>('all')); // Filtro de tareas
 
-
+  // Estado compuesto: combinación de los estados de las tareas y el filtro
+  // para derivar un nuevo estado basado en el filtro actual.
+  taskByFilter = computed(() => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if (filter === 'pending') {
+      return tasks.filter(task => !task.completed);
+    }
+    if (filter === 'completed') {
+      return tasks.filter(task => task.completed);
+    }
+    return tasks;
   })
 
 
@@ -126,6 +139,10 @@ export class HomeComponent {
         return task;
       })
     });
+  }
+
+  changeFilter(filter: 'all' | 'pending' | 'completed') {
+    this.filter.set(filter);
   }
 
 }
