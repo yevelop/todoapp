@@ -1,4 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, computed, effect, inject, Injector, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Task} from '../../models/task.model'
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -13,18 +13,26 @@ import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 })
 export class HomeComponent {
   // Lista de tareas
-  tasks = signal<Task[]>([
-    {
-      id: new Date(Date.now()),
-      title: 'Crear proyecto',
-      completed: false
-    },
-    {
-      id: new Date(Date.now()),
-      title: 'Instalar angular CLI',
-      completed: false
-    },
-  ]);
+  tasks = signal<Task[]>([]);
+
+  injector = inject(Injector);
+
+ngOnInit() {
+    // Cargar las tareas guardadas en localStorage
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      this.tasks.set(JSON.parse(savedTasks));
+    }
+    this.tackTask();
+  }
+
+  tackTask(){
+    effect(() => {
+      const tasks = this.tasks();
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, {injector: this.injector} );
+  }
+
   newTaskControl = new FormControl('', {
     nonNullable: true,
     validators: [

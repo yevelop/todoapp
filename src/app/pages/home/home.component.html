@@ -27,7 +27,7 @@
       </ul>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" *ngIf="taskByFilter().length > 0">
 
       <span class="todo-count">
           <strong>{{ taskByFilter().length }}</strong>
