@@ -1,15 +1,17 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
-  padding: 10px;
+  padding: 10%;
+
 }
 button {
     background-color: #007BFF;  /* Color de fondo azul */
     color: #fff;                 /* Color del texto blanco */
-    padding: 10px 20px;          /* Añade relleno */
+    padding: 5px 10px;          /* Añade relleno */
     border: none;                /* Sin borde */
-    border-radius: 5px;          /* Bordes redondeados */
+    border-radius: 3px;          /* Bordes redondeados */
     cursor: pointer;             /* Cambia el cursor al pasar sobre el botón */
+  margin-top: 1rem;
   }
 
   button:disabled {
@@ -29,3 +31,12 @@ button {
     display: block;
     background-color: red;
   }
+  .message-error{
+    background-color: red;
+    color: white;
+    opacity: 0;
+    transition: all linear .5s;
+  }
+.message-error-active{
+  opacity: 1;
+}

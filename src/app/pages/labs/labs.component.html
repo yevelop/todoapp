@@ -82,8 +82,15 @@
 <input type="number" [formControl]="widthCtrl">
 <span class="box" [style.width.px]="widthCtrl.value"></span>
 
-<div [style.height.px]="200">
+<p>Introduce un nombre inferior a 3 caracteres</p>
+<input type="text" [formControl]="nameCtrl"> <br>
+<span class="message-error" [class.message-error-active]="nameCtrl.invalid">
+     Nombre inválido: El nombre no puede ser inferior a 3 caractéres</span>
 
 
-</div>
+<p>
+  <input type="text">
+</p>
+
+
 </body>
