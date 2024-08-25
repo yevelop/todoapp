@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 // Aqui tenemos la lógica de negocio del componente
 
@@ -8,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
@@ -38,6 +39,9 @@ export class LabsComponent {
     disabled: false,
   }); // Objeto de persona
 
+  colorCtrl = new FormControl();
+
+
   clickHandler(){
     alert('Evento click'); // Manejador de evento click
   }
@@ -63,7 +67,7 @@ export class LabsComponent {
   changeHandlerObject(event: Event) {
     const input = event.target as HTMLInputElement;
     const newAge = parseInt(input.value); // Parsea el valor como un número entero
-  
+
     // Usa el método update para actualizar solo la edad en el objeto person
     this.person.update(person => ({
       ...person,    // Desestructura el objeto actual para mantener el resto de las propiedades
@@ -72,9 +76,9 @@ export class LabsComponent {
   }
   changeHandlerName(event: Event) {
     const input = event.target as HTMLInputElement;
-    const newName = input.value.toLowerCase(); 
-  
-    
+    const newName = input.value.toLowerCase();
+
+
     this.person.update(person => ({
       ...person,    // Desestructura el objeto actual para mantener el resto de las propiedades
       name: newName   // Actualiza la propiedad age con el nuevo valor
