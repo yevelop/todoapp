@@ -1,13 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model'
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [ReactiveFormsModule]
 })
 export class HomeComponent {
   // Lista de tareas
@@ -23,6 +25,15 @@ export class HomeComponent {
         completed: false
         },
   ]);
+  newTaskControl = new FormControl('', {
+   nonNullable: true,
+   validators: [  
+    Validators.required,
+   ],
+
+
+  })
+
 
   // Manejador de cambio de input
   changeHandler(event: Event){
@@ -30,6 +41,16 @@ export class HomeComponent {
     const newTask = input.value;
     // Agregar una nueva tarea
     this.addTask(newTask);
+  }
+
+  changeHandlerForm(){  
+   
+    if(this.newTaskControl.valid){
+      const newTask = this.newTaskControl.value;
+      this.addTask(newTask);
+      this.newTaskControl.reset();
+    }
+    
   }
 
   // Agregar una tarea a la lista

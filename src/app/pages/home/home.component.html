@@ -4,7 +4,8 @@
         <h1>My Day</h1>
         <p>All my tasks in one place</p>
         <input type="text" class="new-todo" placeholder="Type new todo" autofocus
-          (change)="changeHandler($event)"
+         [formControl] = "newTaskControl"
+         (keydown.enter)="changeHandlerForm()"
         />
       </div>
     </header>
