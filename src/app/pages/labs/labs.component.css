@@ -1,3 +1,8 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  padding: 10px;
+}
 button {
     background-color: #007BFF;  /* Color de fondo azul */
     color: #fff;                 /* Color del texto blanco */
@@ -6,12 +11,21 @@ button {
     border-radius: 5px;          /* Bordes redondeados */
     cursor: pointer;             /* Cambia el cursor al pasar sobre el botón */
   }
-  
+
   button:disabled {
     background-color: #ccc;      /* Color de fondo gris cuando está deshabilitado */
     cursor: not-allowed;         /* Cambia el cursor cuando el botón está deshabilitado */
   }
-  
+
   button:hover {
     background-color: #0056b3;   /* Color más oscuro al pasar el cursor */
+  }
+
+  .container{
+    padding: 3rem;
+  }
+  .box{
+    height: 10px;
+    display: block;
+    background-color: red;
   }

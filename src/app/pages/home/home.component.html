@@ -1,20 +1,16 @@
 <section class="todoapp">
     <header class="header">
       <div class="container">
-        <h1>My Day</h1>
-        <p>All my tasks in one place</p>
-        <input type="text" class="new-todo" placeholder="Type new todo" autofocus
+        <h1>Tareas</h1>
+        <p>Mi lista de tareas</p>
+        <input type="text" class="new-todo" placeholder="Nueva Tarea..." autofocus
          [formControl] = "newTaskControl"
          (keydown.enter)="changeHandlerForm()"
         />
       </div>
     </header>
     <div class="container todoapp-wrapper">
-      <pre>
-        <code>
-          {{ tasks() | json }}
-        </code>
-      </pre>
+
       <!-- This section should be hidden by default and shown when there are todos -->
       <section class="main">
         <ul class="todo-list">
@@ -34,7 +30,7 @@
             </div>
            <input class="edit" value="Buy a unicorn" />
           </li>
-          
+
           <li class="editing">
             <div class="view">
               <input class="toggle" type="checkbox" />
@@ -49,12 +45,12 @@
       <!-- This footer should be hidden by default and shown when there are todos -->
       <footer class="footer">
         <!-- This should be `0 items left` by default -->
-         
+
         <span class="todo-count">
-          <strong>{{tasks().length}}</strong> 
+          <strong>{{tasks().length}}</strong>
           <span *ngIf="tasks().length === 1 else plural">item</span>
         </span>
-      
+
       <ng-template #plural> items </ng-template>
         <!-- Remove this if you don't implement routing -->
         <ul class="filters">

@@ -29,6 +29,8 @@ export class HomeComponent {
    nonNullable: true,
    validators: [
     Validators.required,
+     Validators.minLength(3),
+     Validators.maxLength(30),
    ],
 
 
