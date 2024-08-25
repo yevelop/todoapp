@@ -1,8 +1,9 @@
-// Aqui tenenmos la logica de negocio del componente
-
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+
+// Aqui tenemos la lógica de negocio del componente
+
 
 @Component({
   selector: 'app-root',
@@ -12,61 +13,61 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './labs.component.css'
 })
 export class LabsComponent {
-  private welcome = 'Hola';
+  private welcome = 'Hola'; // Variable privada para almacenar el saludo
 
   tasks = signal([
     'Instalar angular CLI',
     'Crear proyecto',
     'Crear componente',
-    'Crear cervicio'
-  ]);
+    'Crear servicio'
+  ]); // Array de tareas
+
   getWelcome(){
-    return this.welcome;
+    return this.welcome; // Método para obtener el saludo
   }
 
-  name = signal('Jose');
-  age = 18;
-  disabled = false;
-  img = 'https://w3schools.com/howto/img_avatar.png';
+  name = signal('Jose'); // Variable para almacenar el nombre
+  age = 18; // Variable para almacenar la edad
+  disabled = false; // Variable para almacenar el estado de deshabilitado
+  img = 'https://w3schools.com/howto/img_avatar.png'; // URL de la imagen de avatar
 
   person = signal({
     name: 'Jose',
     age: 18,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
     disabled: false,
-  });
+  }); // Objeto de persona
 
   clickHandler(){
-    alert('Evento click')
+    alert('Evento click'); // Manejador de evento click
   }
+
   doubleClickHandler(){
-    alert('Evento Doble click')
+    alert('Evento Doble click'); // Manejador de evento doble click
   }
+
   changeHandler(event: Event){
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
-    this.name.set(newValue);
-    console.log(newValue);
+    this.name.set(newValue); // Actualiza el valor de la variable name con el nuevo valor
+    console.log(newValue); // Imprime el nuevo valor en la consola
   }
+
   keydownHandler(event: KeyboardEvent){
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
-    this.name.set(newValue);  
-    console.log(newValue);
+    this.name.set(newValue); // Actualiza el valor de la variable name con el nuevo valor
+    console.log(newValue); // Imprime el nuevo valor en la consola
   }
 
   changeHandlerObject(event: Event) {
     const input = event.target as HTMLInputElement;
-    const newAge = parseInt(input.value); // Parseamos el valor como un número entero
+    const newAge = parseInt(input.value); // Parsea el valor como un número entero
   
-    // Usamos el método update para actualizar solo la edad en el objeto person
+    // Usa el método update para actualizar solo la edad en el objeto person
     this.person.update(person => ({
-      ...person,    // Desestructuramos el objeto actual para mantener el resto de las propiedades
-      age: newAge   // Actualizamos la propiedad age con el nuevo valor
+      ...person,    // Desestructura el objeto actual para mantener el resto de las propiedades
+      age: newAge   // Actualiza la propiedad age con el nuevo valor
     }));
-  
-   
   }
-
 }
-
