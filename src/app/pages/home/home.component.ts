@@ -27,7 +27,7 @@ export class HomeComponent {
   ]);
   newTaskControl = new FormControl('', {
    nonNullable: true,
-   validators: [  
+   validators: [
     Validators.required,
    ],
 
@@ -43,14 +43,16 @@ export class HomeComponent {
     this.addTask(newTask);
   }
 
-  changeHandlerForm(){  
-   
+  changeHandlerForm(){
+
     if(this.newTaskControl.valid){
-      const newTask = this.newTaskControl.value;
-      this.addTask(newTask);
-      this.newTaskControl.reset();
+      const newTask = this.newTaskControl.value.trim();
+      if(newTask != '') {
+        this.addTask(newTask);
+        this.newTaskControl.reset();
+      }
     }
-    
+
   }
 
   // Agregar una tarea a la lista
