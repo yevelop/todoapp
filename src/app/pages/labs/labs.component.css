@@ -1,42 +1,46 @@
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   padding: 10%;
 
 }
+
 button {
-    background-color: #007BFF;  /* Color de fondo azul */
-    color: #fff;                 /* Color del texto blanco */
-    padding: 5px 10px;          /* Añade relleno */
-    border: none;                /* Sin borde */
-    border-radius: 3px;          /* Bordes redondeados */
-    cursor: pointer;             /* Cambia el cursor al pasar sobre el botón */
+  background-color: #007BFF;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
   margin-top: 1rem;
-  }
+}
 
-  button:disabled {
-    background-color: #ccc;      /* Color de fondo gris cuando está deshabilitado */
-    cursor: not-allowed;         /* Cambia el cursor cuando el botón está deshabilitado */
-  }
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
-  button:hover {
-    background-color: #0056b3;   /* Color más oscuro al pasar el cursor */
-  }
+button:hover {
+  background-color: #0056b3;
+}
 
-  .container{
-    padding: 3rem;
-  }
-  .box{
-    height: 10px;
-    display: block;
-    background-color: red;
-  }
-  .message-error{
-    background-color: red;
-    color: white;
-    opacity: 0;
-    transition: all linear .5s;
-  }
-.message-error-active{
+.container {
+  padding: 3rem;
+}
+
+.box {
+  height: 10px;
+  display: block;
+  background-color: red;
+}
+
+.message-error {
+  background-color: red;
+  color: white;
+  opacity: 0;
+  transition: all linear .5s;
+}
+
+.message-error-active {
   opacity: 1;
 }
