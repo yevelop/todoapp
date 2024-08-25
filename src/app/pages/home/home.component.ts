@@ -10,6 +10,7 @@ import { Task } from '../../models/task.model'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  // Lista de tareas
   tasks = signal<Task[]>([
       {
       id: new Date(Date.now()),
@@ -23,14 +24,15 @@ export class HomeComponent {
         },
   ]);
 
-
+  // Manejador de cambio de input
   changeHandler(event: Event){
     const input = event.target as HTMLInputElement;
     const newTask = input.value;
-    // basicamente el metodo update crea una nueva instancia de la lista de tareas
-    // y le agrega el nuevo valor
+    // Agregar una nueva tarea
     this.addTask(newTask);
   }
+
+  // Agregar una tarea a la lista
   addTask(title: string){
     const newTask: Task = {
       id: new Date(Date.now()),
@@ -39,22 +41,21 @@ export class HomeComponent {
     }
      this.tasks.update(tasks =>[...tasks, newTask]);
   }
+
   /**
-   * Deletes a task from the task list based on the given index.
+   * Elimina una tarea de la lista de tareas basado en el índice dado.
    *
-   * @param index - The index of the task to be deleted.
+   * @param index - El índice de la tarea a eliminar.
    */
   deleteTask(index: number){
-    // basicamente el metodo update crea una nueva instancia de la lista de tareas
-    // sin el valor que se le pasa por parametro no la actualiza, sino que crea una nueva
-    // instancia de la lista de tareas
+    // Eliminar una tarea de la lista
     this.tasks.update(tasks => tasks.filter((task, i) => i !== index));
   }
 
   /**
-   * Toggles the completed status of a task.
+   * Cambia el estado completado de una tarea.
    *
-   * @param index - The index of the task to be toggled.
+   * @param index - El índice de la tarea a cambiar.
    */
   updateTask(index: number){
     this.tasks.update(tasks => tasks.map((task, i) => {

@@ -32,7 +32,7 @@ export class LabsComponent {
   img = 'https://w3schools.com/howto/img_avatar.png'; // URL de la imagen de avatar
 
   person = signal({
-    name: 'Jose',
+    name: 'jOsE',
     age: 18,
     avatar: 'https://w3schools.com/howto/img_avatar.png',
     disabled: false,
@@ -70,4 +70,15 @@ export class LabsComponent {
       age: newAge   // Actualiza la propiedad age con el nuevo valor
     }));
   }
+  changeHandlerName(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newName = input.value.toLowerCase(); 
+  
+    
+    this.person.update(person => ({
+      ...person,    // Desestructura el objeto actual para mantener el resto de las propiedades
+      name: newName   // Actualiza la propiedad age con el nuevo valor
+    }));
+  }
+
 }

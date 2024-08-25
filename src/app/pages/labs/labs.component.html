@@ -56,3 +56,22 @@
     <p>Entrada prohibida</p>
 </ng-template>
 
+<pre>
+    <code>
+      {{ person() | json }}
+    </code>
+  </pre>
+
+  <p>(keydown)</p>
+<input type="text" [value]="person().name" (change)="changeHandlerName($event)">
+
+<div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'jose'">Hola soy Jose</p>
+    <p *ngSwitchCase="'maria'">Hola soy Maria</p>
+    <p *ngSwitchDefault>no hay nadie</p>
+
+
+
+
+</div>
+
