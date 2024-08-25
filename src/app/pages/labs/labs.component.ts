@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 
 // Aqui tenemos la lógica de negocio del componente
 
@@ -40,6 +40,14 @@ export class LabsComponent {
   }); // Objeto de persona
 
   colorCtrl = new FormControl();
+  widthCtrl = new FormControl('50',{
+    nonNullable: true,
+    validators: [
+      Validators.required,
+
+    ],
+
+  });
 
   constructor() {
     this.colorCtrl.valueChanges.subscribe(value  =>{console.log(value)});
