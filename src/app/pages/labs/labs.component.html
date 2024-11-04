@@ -5,9 +5,11 @@
 <h1> Laboratorio</h1>
 <h2>{{ getWelcome() }}</h2>
 <ul><p>total: {{ tasks().length }}</p>
-  <li *ngFor="let task of tasks(); index as i">
+  @for (task of tasks(); track task; let i = $index) {
+<li>
     {{ i + 1 }} {{ task }}
   </li>
+}
 </ul>
 <hr/>
 <h2>{{ 'Hola'.repeat(4) }}</h2>
@@ -45,26 +47,40 @@
 <p>name: {{ name() }}</p>
 <p>name: {{ name() }}</p>
 
-<div *ngIf="name() === 'Jose'">
+@if (name() === 'Jose') {
+<div>
   <p>Jose is here</p>
 </div>
+}
 
-<div *ngIf="person().name === 'Jose' && person().age > 18 else prohibido">
+@if (person().name === 'Jose' && person().age > 18) {
+<div>
   <p>Jose is mayor que 18</p>
 </div>
+} @else {
 
-<ng-template #prohibido>
   <p>Entrada prohibida</p>
-</ng-template>
+
+}
+
+
 
 
 <p>(keydown)</p>
 <input type="text" [value]="person().name" (change)="changeHandlerName($event)">
 
-<div [ngSwitch]="person().name">
-  <p *ngSwitchCase="'jose'">Hola soy Jose</p>
-  <p *ngSwitchCase="'maria'">Hola soy Maria</p>
-  <p *ngSwitchDefault>no hay nadie</p>
+<div>
+@switch (person().name) {
+  @case ('jose') {
+<p>Hola soy Jose</p>
+}
+  @case ('maria') {
+<p>Hola soy Maria</p>
+}
+  @default {
+<p>no hay nadie</p>
+}
+}
 </div>
 
 <div>

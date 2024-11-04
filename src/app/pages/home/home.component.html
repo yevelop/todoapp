@@ -13,8 +13,9 @@
 
     <section class="main">
       <ul class="todo-list">
-        <li (dblclick)="updateTaskEditingMode(i)"
-            *ngFor="let task of taskByFilter();index as i"
+        @for (task of taskByFilter(); track task; let i = $index) {
+<li (dblclick)="updateTaskEditingMode(i)"
+           
             [class.editing]="task.editing"
             [class.completed]="task.completed">
           <div class="view">
@@ -24,17 +25,23 @@
           </div>
           <input class="edit" (keydown.enter)="updateTaskText(i,$event)" [value]="task.title"/>
         </li>
+}
       </ul>
     </section>
 
-    <footer class="footer" *ngIf="taskByFilter().length > 0">
+    @if (taskByFilter().length > 0) {
+<footer class="footer">
 
       <span class="todo-count">
           <strong>{{ taskByFilter().length }}</strong>
-          <span *ngIf="filter().length === 1 else plural">item</span>
+          @if (filter().length === 1) {
+<span>item</span>
+} @else {
+ items
+}
         </span>
 
-      <ng-template #plural> items</ng-template>
+      
       <ul class="filters">
         <li>
           <a (click)="changeFilter('all')"
@@ -52,6 +59,7 @@
       </ul>
       <button class="clear-completed">Clear completed</button>
     </footer>
+}
   </div>
 
 </section>
